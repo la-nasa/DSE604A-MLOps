@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mlflow:
+    build:
+      context: .
+      dockerfile: docker/mlflow.Dockerfile
+    container_name: mlflow
+    ports:
+      - "5000:5000"
+    environment:
+      - MLFLOW_TRACKING_URI=http://0.0.0.0:5000
+    volumes:
+      - ./mlruns:/mlruns
+    command: mlflow server --backend-store-uri /mlruns --default-artifact-root /mlruns -h 0.0.0.0 -p 5000
+
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: dse604a-app
+    ports:
+      - "8081:8080"
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+      - MLFLOW_MODEL_URI=RetailForecast_RF
+    depends_on:
+      - mlflow
+    volumes:
+      - ./mlruns:/app/mlruns

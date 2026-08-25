@@ -1,0 +1,38 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+
+# MLflow
+mlruns/
+artifacts/
+
+# Environnement
+.env
+.env.local
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Données sensibles
+data/raw/
+*.pkl
+*.joblib
+
+REPORT
+manual_extract
